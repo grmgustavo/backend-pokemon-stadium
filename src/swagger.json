@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Pokemon API - Desafio Backend Jazida",
+    "version": "1.0.0",
+    "description": "Api para batalhas Pokemon"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API"
+    }
+  ],
+  "paths": {
+    "/pokemons": {
+      "post": {
+        "summary": "Cadastro de pokemons",
+        "description": "Esta rota é responsável por cadastrar um novo pokemon",
+        "tags": ["Pokemons"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostPokemon"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Retorna em JSON o objeto inserido no banco de dados"
+          }
+        }
+      },
+      "get": {
+        "summary": "Listagem de Pokemons",
+        "description": "Localiza todos os pokemons cadastrados.",
+        "tags": ["Pokemons"],
+
+        "responses": {
+          "200": {
+            "description": "Retorna em JSON todos os pokemons cadastrados."
+          },
+          "204": {
+            "description": "Retorna nenhum conteúdo, caso não tenham pokemons cadastrados no banco"
+          }
+        }
+      }
+    },
+    "/pokemons/{id}": {
+      "get": {
+        "summary": "Listagem por ID",
+        "description": "Lista um pokemon por ID",
+        "tags": ["Pokemons"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Pokemon",
+            "required": true,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna em JSON o objeto localizado pelo ID"
+          },
+          "404": {
+            "description": "Caso o Pokemon não exista, retorna uma mensagem de erro informando que o pokemon não foi localizado"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza o nome do treinador",
+        "description": "Atualiza o nome do treinador por id",
+        "tags": ["Pokemons"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutPokemon"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Pokemon",
+            "required": true,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deleta por ID",
+        "description": "Deleta um pokemon por ID",
+        "tags": ["Pokemons"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Pokemon",
+            "required": true,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
+    "/batalhar/{idPokemonA}/{idPokemonB}": {
+      "get": {
+        "summary": "Batalha entre 2 pokemons",
+        "description": "Realiza uma batalha entre 2 pokemons, onde o nível dos pokemons será comparado, se forem do mesmo nível, a probabilidade de vitória será a mesma entre os dois, mas se forem diferentes, a probabilidade de vitória para o pokemon de maior nível será 2/3(66%). O pokemon vencedor terá seu nível almentado em 1, e o perdedor terá seu nível reduzido para 0 e será deletado da tabela",
+        "tags": ["Batalha"],
+        "parameters": [
+          {
+            "name": "idPokemonA",
+            "in": "path",
+            "description": "Id do Pokemon A",
+            "required": true,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "idPokemonB",
+            "in": "path",
+            "description": "Id do Pokemon B",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o vencedor e o perdedor."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pokemon": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID gerado automaticamente pelo banco de dados",
+            "required": ["false"],
+            "example": 1
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo do pokemon, pode ser pikachu, charizard ou mewtwo",
+            "example": "pikachu",
+            "required": ["true"]
+          },
+          "treinador": {
+            "type": "string",
+            "description": "Nome do treinador",
+            "example": "Gustavo",
+            "required": ["true"]
+          },
+          "nivel": {
+            "type": "integer",
+            "description": "Nivel do pokemon, inicialmente 1",
+            "required": ["false"],
+            "example": 1
+          }
+        }
+      },
+      "PostPokemon": {
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "description": "Tipo do pokemon, pode ser pikachu, charizard ou mewtwo",
+            "example": "pikachu",
+            "required": ["true"]
+          },
+          "treinador": {
+            "type": "string",
+            "description": "Nome do treinador",
+            "example": "Gustavo",
+            "required": ["true"]
+          }
+        }
+      },
+      "PutPokemon": {
+        "type": "object",
+        "properties": {
+          "treinador": {
+            "type": "string",
+            "description": "Nome do treinador",
+            "example": "Gustavo Machado",
+            "required": ["true"]
+          }
+        }
+      }
+    }
+  }
+}

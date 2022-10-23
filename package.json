@@ -1,0 +1,27 @@
+{
+  "name": "pokemon-stadium",
+  "version": "1.0.0",
+  "description": "crud básico e um algoritmo de batalhas pokémon.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js",
+    "start": "node ./src/server.js",
+    "test": "jest"
+  },
+  "author": "Gustavo Machado",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.2.1",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mariadb": "^3.0.1",
+    "sequelize": "^6.25.2",
+    "swagger-ui-express": "^4.5.0",
+    "tedious": "^15.1.0"
+  }
+}
