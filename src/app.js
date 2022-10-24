@@ -11,15 +11,17 @@ const cors = require("cors");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
-sequelize
-  .authenticate()
-  .then(() => {
-    sequelize.sync();
-    console.log("Conexão com o banco de dados realizada!");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+setTimeout(() => {
+  sequelize
+    .authenticate()
+    .then(() => {
+      sequelize.sync();
+      console.log("Conexão com o banco de dados realizada!");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, 10000);
 
 app
   .use(cors())
