@@ -1,9 +1,8 @@
-# Use root/example as user/password credentials
 version: "3.9"
 
 services:
-  mariadb:
-    image: mariadb:10.2
+  db:
+    image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
       MYSQL_DATABASE: ${DATABASE}
@@ -11,3 +10,21 @@ services:
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - ${DATABASE_PORT}:3306
+    networks:
+      - pokemon_networks
+  app:
+    build:
+      context: .
+    container_name: pokemon-stadium
+    command: npm run start
+    ports:
+      - ${PORT}:3000
+    depends_on:
+      - db
+    networks:
+      - pokemon_networks
+    links:
+      - "db"
+networks:
+  pokemon_networks:
+    driver: bridge
