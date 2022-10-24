@@ -57,7 +57,6 @@ const batalhar = async (pokemonAId, pokemonBId) => {
 
   await salvarResultado(pokemonAId, pokemonBId, resultadoDabatalha);
 
-  console.log("Batalha> ");
   return resultadoDabatalha;
 };
 
