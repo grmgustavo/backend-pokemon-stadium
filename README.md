@@ -16,3 +16,19 @@ npm run start
 # whatch mode
 npm run dev
 ```
+
+## Enviroment Variables
+
+The example of env variables is available at the ".env.example" file.
+The .env file is necessary before running the app.
+
+## API Documentation
+
+The API documentation using Swagger is available at the "/api-docs" route.
+![Swagger](./readme.assets/Swagger.png)
+
+## Frontend project
+
+The frontend for this app is available at [here](https://github.com/grmgustavo/frontent-pokemon-stadium).
+![Frontend](./readme.assets/front-end.png)
+![battle frontend](./readme.assets/front-end-battle.png)
