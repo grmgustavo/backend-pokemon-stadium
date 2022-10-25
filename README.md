@@ -17,6 +17,14 @@ npm run start
 npm run dev
 ```
 
+## Running the app with docker
+
+After setting up the enviroment variables
+
+```bash
+docker-compose up
+```
+
 ## Enviroment Variables
 
 The example of env variables is available at the ".env.example" file.
